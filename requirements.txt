@@ -1,0 +1,12 @@
+django
+psycopg2
+dj-database-url
+bpython
+pytest
+djangorestframework
+flake8
+black
+isort
+pytest-django
+factory_boy
+django-localflavor

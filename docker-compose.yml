@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  api:
+    build: .
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /bin/sleep 3
+        python /api/manage.py migrate
+        python /api/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/api
+    environment:
+      DEBUG: 1
+      SECRET_KEY: secret-key
+      DATABASE_URL: "postgres://postgres:password@db:5432/postgres"
+    stdin_open: true
+    tty: true
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
